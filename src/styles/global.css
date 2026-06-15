@@ -3,40 +3,83 @@
 @tailwind utilities;
 
 @layer base {
+  /* ===== DARK theme (default) ===== */
   :root {
+    --c-ink-950: 11 5 7;
+    --c-ink-900: 20 10 12;
+    --c-ink-800: 28 16 20;
+    --c-ink-700: 42 23 27;
+    --c-cream: 245 233 215;
+    --c-cream-warm: 239 224 201;
+    --c-cream-muted: 217 199 172;
+    --c-bordeaux: 58 15 20;
+    --c-bordeaux-deep: 36 5 9;
+    --c-crimson: 200 16 46;
+    --c-crimson-bright: 225 26 44;
+    --c-crimson-soft: 163 13 36;
+    --c-gold: 201 169 97;
+    --c-gold-deep: 168 136 72;
+    --c-gold-pale: 225 201 140;
+    --c-ivory: 245 233 215;
+
     --grain-opacity: 0.06;
+    --glow-strength: 1;
+    --scrollbar-track: 11 5 7;
+    --scrollbar-thumb: 42 23 27;
+    color-scheme: dark;
+  }
+
+  /* ===== LIGHT theme ===== */
+  html.light {
+    --c-ink-950: 247 242 234; /* warm ivory base */
+    --c-ink-900: 240 233 221; /* card surface */
+    --c-ink-800: 231 221 206;
+    --c-ink-700: 213 200 181; /* hairlines */
+    --c-cream: 38 22 26;       /* deep ink-brown text */
+    --c-cream-warm: 58 15 20;
+    --c-cream-muted: 96 78 70;
+    --c-crimson: 188 12 40;    /* slightly deeper for contrast on light */
+    --c-crimson-bright: 209 18 44;
+    --c-crimson-soft: 150 10 32;
+    /* bordeaux, gold, ivory stay fixed */
+
+    --grain-opacity: 0.04;
+    --glow-strength: 0.4;
+    --scrollbar-track: 247 242 234;
+    --scrollbar-thumb: 213 200 181;
+    color-scheme: light;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: #0B0507;
-    color: #F5E9D7;
+    background-color: rgb(var(--c-ink-950));
+    color: rgb(var(--c-cream));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     font-family: 'Manrope', system-ui, sans-serif;
-    background-color: #0B0507;
-    color: #F5E9D7;
+    background-color: rgb(var(--c-ink-950));
+    color: rgb(var(--c-cream));
     overflow-x: hidden;
     font-optical-sizing: auto;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
 
-  /* Fraunces display — let optical sizing breathe at large sizes */
+  /* Playfair Display — elegant high-contrast serif for headings */
   .font-display {
-    font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   ::selection {
-    background-color: #C8102E;
-    color: #F5E9D7;
+    background-color: rgb(var(--c-crimson));
+    color: rgb(var(--c-ivory));
   }
 
   /* Visible keyboard focus — accessibility */
   :focus-visible {
-    outline: 2px solid #C8102E;
+    outline: 2px solid rgb(var(--c-crimson));
     outline-offset: 3px;
     border-radius: 1px;
   }
@@ -79,7 +122,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-3 bg-crimson text-cream px-7 py-3.5 text-[12px] font-body uppercase tracking-[0.32em] transition-all duration-300 hover:bg-crimson-bright hover:translate-y-[-2px] active:translate-y-0 active:scale-[0.98];
+    @apply inline-flex items-center gap-3 bg-crimson text-ivory px-7 py-3.5 text-[12px] font-body uppercase tracking-[0.32em] transition-all duration-300 hover:bg-crimson-bright hover:translate-y-[-2px] active:translate-y-0 active:scale-[0.98];
   }
 
   .btn-ghost {
@@ -128,7 +171,7 @@
 
 /* Active nav link — scroll-spy */
 .nav-link[data-active='true'] {
-  color: #F5E9D7;
+  color: rgb(var(--c-cream));
 }
 .nav-link[data-active='true']::after {
   transform: scaleX(1);
@@ -138,7 +181,7 @@
   display: block;
   height: 1px;
   margin-top: 4px;
-  background-color: #C8102E;
+  background-color: rgb(var(--c-crimson));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -154,8 +197,8 @@
   left: 1rem;
   z-index: 100;
   transform: translateY(-160%);
-  background-color: #C8102E;
-  color: #F5E9D7;
+  background-color: rgb(var(--c-crimson));
+  color: rgb(var(--c-ivory));
   padding: 0.75rem 1.25rem;
   font-family: 'Manrope', system-ui, sans-serif;
   font-size: 12px;
@@ -212,12 +255,31 @@
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0507;
+  background: rgb(var(--scrollbar-track));
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A171B;
+  background: rgb(var(--scrollbar-thumb));
   border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3A0F14;
+  background: rgb(var(--c-crimson));
+}
+
+/* Dim ambient glow layers in light mode so they don't smudge the ivory bg */
+.ambient-glow {
+  opacity: calc(var(--ag-base, 0.3) * var(--glow-strength));
+}
+
+/* Theme toggle — show the icon of the theme you'll switch TO */
+.theme-toggle .icon-moon {
+  display: none;
+}
+.theme-toggle .icon-sun {
+  display: inline-flex;
+}
+html.light .theme-toggle .icon-sun {
+  display: none;
+}
+html.light .theme-toggle .icon-moon {
+  display: inline-flex;
 }

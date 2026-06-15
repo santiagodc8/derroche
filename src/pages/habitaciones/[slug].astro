@@ -39,10 +39,10 @@ const spans = [
   <main id="top" class="relative bg-ink-950 overflow-hidden">
     <!-- Ambient backdrop -->
     <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute -right-40 top-0 h-[640px] w-[640px] rounded-full opacity-25 blur-3xl"
-           style="background: radial-gradient(closest-side, #C8102E, transparent);"></div>
+      <div class="absolute -right-40 top-0 h-[640px] w-[640px] rounded-full blur-3xl ambient-glow"
+           style="--ag-base: 0.25; background: radial-gradient(closest-side, rgb(var(--c-crimson)), transparent);"></div>
       <div class="absolute inset-0 opacity-[0.05]"
-           style="background-image: radial-gradient(circle at 1px 1px, #F5E9D7 1px, transparent 0); background-size: 40px 40px;"></div>
+           style="background-image: radial-gradient(circle at 1px 1px, rgb(var(--c-cream)) 1px, transparent 0); background-size: 40px 40px;"></div>
     </div>
 
     <div class="relative mx-auto max-w-[1500px] px-6 lg:px-12 pt-32 lg:pt-36">
@@ -223,14 +223,14 @@ const spans = [
 
       <!-- CTA band -->
       <section class="mt-24 lg:mt-32">
-        <div class="relative overflow-hidden border border-crimson/30 bg-gradient-to-br from-bordeaux-deep via-bordeaux to-ink-900 p-10 lg:p-16">
-          <div class="absolute -right-24 -top-24 w-[360px] h-[360px] arch border border-cream/10 pointer-events-none"></div>
+        <div class="relative overflow-hidden border border-crimson/30 bg-gradient-to-br from-bordeaux-deep via-bordeaux to-crimson-soft p-10 lg:p-16">
+          <div class="absolute -right-24 -top-24 w-[360px] h-[360px] arch border border-ivory/10 pointer-events-none"></div>
           <div class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
-              <h2 class="font-display text-cream text-[clamp(2rem,4vw,3.2rem)] leading-[0.95]">
-                ¿Lista la <span class="italic font-accent text-crimson">{room.name}</span>?
+              <h2 class="font-display text-ivory text-[clamp(2rem,4vw,3.2rem)] leading-[0.95]">
+                ¿Lista la <span class="italic font-accent text-crimson-bright">{room.name}</span>?
               </h2>
-              <p class="font-accent italic text-cream/70 text-xl mt-4 max-w-md leading-relaxed">
+              <p class="font-accent italic text-ivory/70 text-xl mt-4 max-w-md leading-relaxed">
                 Reserva en segundos por WhatsApp. Disponibilidad inmediata, acceso discreto.
               </p>
             </div>

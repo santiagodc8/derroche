@@ -46,7 +46,20 @@ const links = [
       ))}
     </ul>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Cambiar tema claro u oscuro"
+        class="theme-toggle inline-flex items-center justify-center h-10 w-10 text-cream/70 hover:text-crimson transition-colors"
+      >
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
       <a
         href={whatsapp}
         target="_blank"
@@ -87,9 +100,23 @@ const links = [
     <nav class="absolute right-0 top-0 h-full w-[82%] max-w-sm bg-ink-900 border-l border-cream/10 translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col" data-menu-drawer>
       <div class="flex items-center justify-between px-7 py-6 border-b border-cream/10">
         <span class="font-display text-cream text-xl">Derroche</span>
+        <div class="flex items-center gap-1 -mr-2">
         <button
           type="button"
-          class="inline-flex items-center justify-center h-10 w-10 -mr-2 text-cream/70 hover:text-crimson transition-colors"
+          data-theme-toggle
+          aria-label="Cambiar tema claro u oscuro"
+          class="theme-toggle inline-flex items-center justify-center h-10 w-10 text-cream/70 hover:text-crimson transition-colors"
+        >
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="inline-flex items-center justify-center h-10 w-10 text-cream/70 hover:text-crimson transition-colors"
           aria-label="Cerrar menú"
           data-menu-close
         >
@@ -98,6 +125,7 @@ const links = [
             <line x1="18" y1="6" x2="6" y2="18" />
           </svg>
         </button>
+        </div>
       </div>
       <ul class="flex flex-col px-7 py-6 gap-1">
         {links.map((l) => (
@@ -179,5 +207,18 @@ const links = [
         if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') closeMenu();
       });
     }
+
+    /* Theme toggle (light / dark) */
+    const applyTheme = (t) => {
+      document.documentElement.classList.toggle('light', t === 'light');
+      try { localStorage.setItem('derroche-theme', t); } catch (e) {}
+      const tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', t === 'light' ? '#F7F2EA' : '#0B0507');
+    };
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        applyTheme(document.documentElement.classList.contains('light') ? 'dark' : 'light');
+      });
+    });
   })();
 </script>

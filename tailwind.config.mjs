@@ -1,38 +1,45 @@
 /** @type {import('tailwindcss').Config} */
+const v = (name) => `rgb(var(--c-${name}) / <alpha-value>)`;
+
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {
+        // Theme-aware page chrome (values swap per light/dark in global.css)
         ink: {
-          DEFAULT: '#0B0507',
-          950: '#0B0507',
-          900: '#140A0C',
-          800: '#1C1014',
-          700: '#2A171B',
-        },
-        bordeaux: {
-          DEFAULT: '#3A0F14',
-          deep: '#240509',
-        },
-        crimson: {
-          DEFAULT: '#C8102E',
-          bright: '#E11A2C',
-          soft: '#A30D24',
+          DEFAULT: v('ink-950'),
+          950: v('ink-950'),
+          900: v('ink-900'),
+          800: v('ink-800'),
+          700: v('ink-700'),
         },
         cream: {
-          DEFAULT: '#F5E9D7',
-          warm: '#EFE0C9',
-          muted: '#D9C7AC',
+          DEFAULT: v('cream'),
+          warm: v('cream-warm'),
+          muted: v('cream-muted'),
+        },
+        // Fixed brand accents (identical in both themes)
+        bordeaux: {
+          DEFAULT: v('bordeaux'),
+          deep: v('bordeaux-deep'),
+        },
+        crimson: {
+          DEFAULT: v('crimson'),
+          bright: v('crimson-bright'),
+          soft: v('crimson-soft'),
         },
         gold: {
-          DEFAULT: '#C9A961',
-          deep: '#A88848',
-          pale: '#E1C98C',
+          DEFAULT: v('gold'),
+          deep: v('gold-deep'),
+          pale: v('gold-pale'),
         },
+        // Fixed warm-white for text/icons sitting on accent surfaces
+        ivory: v('ivory'),
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
         accent: ['"Cormorant Garamond"', 'serif'],
         body: ['Manrope', 'system-ui', 'sans-serif'],
         numeric: ['"DM Serif Display"', 'serif'],

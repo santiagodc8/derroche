@@ -1,31 +1,14 @@
 ---
 const fotos = [
-  {
-    src: '/habitaciones/presidencial/presidencial2.jpeg',
-    alt: 'Suite Presidencial con jacuzzi privado',
-    span: 'col-span-12 lg:col-span-7 lg:row-span-2 aspect-[4/3] lg:aspect-auto',
-  },
-  {
-    src: '/habitaciones/junior/junior2.jpeg',
-    alt: 'Habitación Junior',
-    span: 'col-span-6 lg:col-span-5 aspect-square',
-  },
-  {
-    src: '/habitaciones/solarium/solarium2.jpeg',
-    alt: 'Suite Solarium Plus con solárium privado',
-    span: 'col-span-6 lg:col-span-5 aspect-square',
-  },
-  {
-    src: '/habitaciones/silver/silver2.jpeg',
-    alt: 'Habitación Silver',
-    span: 'col-span-12 lg:col-span-4 aspect-[4/3]',
-  },
-  {
-    src: '/habitaciones/presidencial/presidencial3.jpeg',
-    alt: 'Detalle interior de la Suite Presidencial',
-    span: 'col-span-12 lg:col-span-8 aspect-[16/9]',
-  },
+  { src: '/habitaciones/presidencial/presidencial2.jpeg', label: 'Presidencial', alt: 'Suite Presidencial con jacuzzi privado', span: 'col-span-2 row-span-2' },
+  { src: '/habitaciones/solarium/solarium2.jpeg', label: 'Solarium Plus', alt: 'Suite Solarium Plus con solárium privado', span: 'col-span-2 row-span-1' },
+  { src: '/habitaciones/junior/junior3.jpeg', label: 'Junior', alt: 'Habitación Junior', span: 'col-span-1 row-span-1' },
+  { src: '/habitaciones/silver/silver1.jpeg', label: 'Silver', alt: 'Habitación Silver', span: 'col-span-1 row-span-1' },
+  { src: '/habitaciones/presidencial/presidencial5.jpeg', label: 'Presidencial', alt: 'Detalle interior de la Suite Presidencial', span: 'col-span-2 row-span-1' },
+  { src: '/habitaciones/junior/junior6.jpeg', label: 'Junior', alt: 'Detalle de la Habitación Junior', span: 'col-span-2 row-span-1' },
 ];
+
+const imgs = fotos.map((f) => f.src);
 ---
 
 <section id="galeria" class="relative py-28 lg:py-36 bg-ink-950 overflow-hidden">
@@ -42,27 +25,112 @@ const fotos = [
         </h2>
       </div>
       <p class="font-accent italic text-cream/70 text-lg max-w-md leading-relaxed">
-        Un vistazo a los espacios que te están esperando. Cada rincón pensado
-        para hacerte sentir como en un capricho personal.
+        Un vistazo a los espacios que te están esperando. Haz clic en cualquier
+        foto para verla en grande.
       </p>
     </div>
 
-    <div class="grid grid-cols-12 gap-3 lg:gap-5">
+    <div
+      class="grid grid-cols-2 lg:grid-cols-4 auto-rows-[148px] sm:auto-rows-[190px] lg:auto-rows-[225px] gap-3 lg:gap-4"
+      data-reveal
+    >
       {fotos.map((foto, i) => (
-        <figure class={`relative overflow-hidden group ${foto.span}`} data-reveal style={`--reveal-delay: ${i * 60}ms`}>
+        <button
+          type="button"
+          class={`group relative overflow-hidden ${foto.span}`}
+          data-gal-open
+          data-index={i}
+          aria-label={`Ampliar: ${foto.alt}`}
+        >
           <img
             src={foto.src}
             alt={foto.alt}
             loading="lazy"
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.07]"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
-          <figcaption class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
-            <span class="font-accent italic text-cream text-sm">{foto.alt}</span>
-            <span class="font-numeric text-cream/60 text-xs">/ derroche</span>
-          </figcaption>
-        </figure>
+          <!-- Base + hover scrim -->
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-transparent to-transparent transition-opacity duration-500 group-hover:from-ink-950/75"></div>
+          <!-- Hairline frame on hover -->
+          <div class="absolute inset-0 ring-1 ring-inset ring-cream/0 group-hover:ring-cream/15 transition-all duration-500"></div>
+          <!-- Expand affordance -->
+          <span class="absolute top-4 right-4 h-9 w-9 flex items-center justify-center bg-ink-950/40 backdrop-blur-sm text-cream translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+          </span>
+          <!-- Label (revealed on hover) -->
+          <span class="absolute bottom-4 left-4 flex items-center gap-2.5 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+            <span class="h-px w-5 bg-crimson"></span>
+            <span class="font-body text-[10px] uppercase tracking-[0.3em] text-cream">{foto.label}</span>
+          </span>
+        </button>
       ))}
     </div>
+
+    <!-- Ver todas -->
+    <div class="mt-12 flex justify-center lg:justify-end" data-reveal>
+      <a
+        href="/#habitaciones"
+        class="inline-flex items-center gap-3 text-cream/70 font-body text-[11px] uppercase tracking-[0.32em] border-b border-cream/20 pb-2 transition-all duration-300 hover:gap-5 hover:text-crimson hover:border-crimson/60"
+      >
+        Ver todas las habitaciones
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
   </div>
+
+  <!-- Lightbox -->
+  <div
+    id="gal-lightbox"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-ink-950/95 backdrop-blur-md"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Galería ampliada"
+  >
+    <button type="button" class="absolute top-5 right-5 h-12 w-12 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-gal-close aria-label="Cerrar">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <button type="button" class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 h-14 w-14 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-gal-prev aria-label="Anterior">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 h-14 w-14 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-gal-next aria-label="Siguiente">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <figure class="relative max-w-[92vw] max-h-[84vh] flex flex-col items-center gap-4">
+      <img id="gal-img" src="" alt="" class="max-w-[92vw] max-h-[78vh] object-contain border border-cream/10" />
+      <figcaption class="font-body text-[11px] uppercase tracking-[0.32em] text-cream/50" data-gal-counter></figcaption>
+    </figure>
+  </div>
+
+  <script is:inline define:vars={{ imgs }}>
+    (() => {
+      const lb = document.getElementById('gal-lightbox');
+      const img = document.getElementById('gal-img');
+      const counter = lb?.querySelector('[data-gal-counter]');
+      if (!lb || !img) return;
+      let current = 0;
+      const render = () => {
+        img.src = imgs[current];
+        img.alt = `Galería Derroche — foto ${current + 1}`;
+        if (counter) counter.textContent = `${current + 1} / ${imgs.length}`;
+      };
+      const open = (i) => { current = i; render(); lb.classList.remove('hidden'); lb.classList.add('flex'); document.body.style.overflow = 'hidden'; };
+      const close = () => { lb.classList.add('hidden'); lb.classList.remove('flex'); document.body.style.overflow = ''; };
+      const next = () => { current = (current + 1) % imgs.length; render(); };
+      const prev = () => { current = (current - 1 + imgs.length) % imgs.length; render(); };
+      document.querySelectorAll('[data-gal-open]').forEach((el) => el.addEventListener('click', () => open(Number(el.getAttribute('data-index')) || 0)));
+      lb.querySelector('[data-gal-close]')?.addEventListener('click', close);
+      lb.querySelector('[data-gal-next]')?.addEventListener('click', next);
+      lb.querySelector('[data-gal-prev]')?.addEventListener('click', prev);
+      lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+  </script>
 </section>
