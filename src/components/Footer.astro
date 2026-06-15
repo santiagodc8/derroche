@@ -1,0 +1,105 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative bg-ink-950 pt-24 pb-10 border-t border-cream/10 overflow-hidden">
+  <!-- Decorative giant wordmark -->
+  <div class="absolute -bottom-16 left-0 right-0 pointer-events-none overflow-hidden">
+    <p class="font-display text-cream/[0.04] text-[18vw] leading-none text-center whitespace-nowrap">
+      Derroche
+    </p>
+  </div>
+
+  <div class="relative mx-auto max-w-[1500px] px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-5">
+        <div class="flex items-center gap-4">
+          <img src="/derroche.png" alt="Derroche" class="h-16 w-16 object-contain" />
+          <div>
+            <p class="font-display text-cream text-3xl leading-none">Derroche</p>
+            <p class="eyebrow mt-1 text-cream/50">Aparta Hotel · Cali</p>
+          </div>
+        </div>
+        <p class="font-accent italic text-cream/65 text-lg mt-6 max-w-md leading-relaxed">
+          Lujo discreto, momentos inolvidables. Reserva tu suite — estamos
+          disponibles todos los días.
+        </p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <p class="eyebrow text-cream/50">Contacto</p>
+        <ul class="mt-5 space-y-3">
+          <li>
+            <a
+              href="https://wa.me/573147241900"
+              target="_blank"
+              rel="noopener"
+              class="font-body text-cream hover:text-crimson transition-colors"
+            >
+              +57 314 724 1900
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/derrochecali/"
+              target="_blank"
+              rel="noopener"
+              class="font-body text-cream hover:text-crimson transition-colors inline-flex items-center gap-2"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              </svg>
+              @derrochecali
+            </a>
+          </li>
+          <li class="pt-2">
+            <p class="font-body text-cream/85 leading-relaxed">
+              Cl. 10 #62c-38<br />
+              <span class="text-cream/60">Pampa Linda · Cali</span>
+            </p>
+            <a
+              href="https://maps.app.goo.gl/iZx4X2Zb6MWoNnLp9"
+              target="_blank"
+              rel="noopener"
+              class="mt-2 inline-block text-[11px] font-body uppercase tracking-[0.32em] text-crimson hover:text-crimson-bright transition-colors"
+            >
+              Ver en Maps →
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <p class="eyebrow text-cream/50">Habitaciones</p>
+        <ul class="mt-5 space-y-3 font-body text-cream/80">
+          <li><a href="#habitaciones" class="hover:text-crimson transition-colors">Silver</a></li>
+          <li><a href="#habitaciones" class="hover:text-crimson transition-colors">Junior</a></li>
+          <li><a href="#habitaciones" class="hover:text-crimson transition-colors">Presidencial</a></li>
+          <li><a href="#habitaciones" class="hover:text-crimson transition-colors">Solarium Plus</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <p class="eyebrow text-cream/50">Navegar</p>
+        <ul class="mt-5 space-y-3 font-body text-cream/80">
+          <li><a href="#servicios" class="hover:text-crimson transition-colors">Servicios</a></li>
+          <li><a href="#promocion" class="hover:text-crimson transition-colors">Promoción</a></li>
+          <li><a href="#galeria" class="hover:text-crimson transition-colors">Galería</a></li>
+          <li><a href="#ubicacion" class="hover:text-crimson transition-colors">Ubicación</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 relative z-10">
+      <p class="eyebrow text-cream/40">
+        © {year} Derroche Aparta Hotel · Todos los derechos reservados
+      </p>
+      <p class="eyebrow text-cream/40">
+        Hecho con <span class="text-crimson">♥</span> en Cali
+      </p>
+    </div>
+  </div>
+</footer>

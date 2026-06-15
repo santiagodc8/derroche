@@ -1,0 +1,183 @@
+---
+const habitaciones = [
+  {
+    number: '01',
+    name: 'Silver',
+    tagline: 'Confort esencial',
+    price: 82000,
+    descripcion:
+      'Nuestra opción acogedora. Espacio íntimo, ambientación cálida y todo lo necesario para una escapada perfecta.',
+    features: ['Cama doble', 'Baño privado', 'TV', 'Wifi', 'Aire acondicionado'],
+    image: '/habitaciones/silver/silver1.jpeg',
+    featured: false,
+  },
+  {
+    number: '02',
+    name: 'Junior',
+    tagline: 'Un paso más arriba',
+    price: 87000,
+    descripcion:
+      'Más espacio, mejores acabados y un ambiente refinado pensado para los amantes del detalle.',
+    features: ['Cama queen', 'Baño amplio', 'Smart TV', 'Wifi', 'Aire acondicionado'],
+    image: '/habitaciones/junior/junior1.jpeg',
+    featured: false,
+  },
+  {
+    number: '03',
+    name: 'Presidencial',
+    tagline: 'Lujo absoluto',
+    price: 117000,
+    descripcion:
+      'Una experiencia premium. Diseño elevado, jacuzzi privado y ambientación pensada al milímetro.',
+    features: ['Cama king', 'Jacuzzi', 'Smart TV', 'Bar', 'Aire acondicionado'],
+    image: '/habitaciones/presidencial/presidencial1.jpeg',
+    featured: true,
+  },
+  {
+    number: '04',
+    name: 'Suite Solarium Plus',
+    tagline: 'Lo extraordinario',
+    price: 142000,
+    descripcion:
+      'Nuestra suite insignia. Solárium privado, jacuzzi, vista abierta y todos los lujos pensados para que no quieras irte.',
+    features: ['Solárium privado', 'Jacuzzi', 'Cama king premium', 'Smart TV', 'Bar', 'Aire acondicionado'],
+    image: '/habitaciones/solarium/solarium1.jpeg',
+    featured: true,
+  },
+];
+
+const fmt = (n: number) => '$' + n.toLocaleString('es-CO');
+
+const waMessage = (room: string) =>
+  'https://wa.me/573147241900?text=' +
+  encodeURIComponent(`Hola Derroche, me interesa reservar la habitación ${room}.`);
+---
+
+<section id="habitaciones" class="relative py-28 lg:py-40 bg-ink-950">
+  <div class="mx-auto max-w-[1500px] px-6 lg:px-12">
+    <!-- Heading row -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 mb-20" data-reveal>
+      <div>
+        <p class="eyebrow flex items-center gap-4">
+          <span class="h-px w-10 bg-crimson"></span>
+          Habitaciones · 04 estilos
+        </p>
+        <h2 class="section-heading mt-6">
+          Cada suite,<br />
+          <span class="italic font-accent text-crimson">una historia distinta.</span>
+        </h2>
+      </div>
+      <div class="max-w-md font-body text-cream/65 leading-relaxed">
+        Cuatro categorías cuidadosamente diseñadas para acompañarte en cada
+        ocasión. <span class="font-accent italic text-cream">Tarifa base por 3 horas</span> —
+        también disponibles en 8 y 12 horas.
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      {habitaciones.map((h, i) => (
+        <article
+          class={`group relative overflow-hidden bg-ink-900 border border-cream/10 transition-all duration-500 hover:border-crimson/40 ${
+            h.featured ? 'lg:col-span-12' : 'lg:col-span-6'
+          }`}
+          data-room
+          data-reveal
+          style={`--reveal-delay: ${(i % 2) * 90}ms`}
+        >
+          {h.featured && (
+            <div class="absolute top-6 right-6 z-20 bg-crimson text-cream text-[10px] uppercase tracking-[0.32em] px-3 py-1.5">
+              {h.number === '04' ? 'Insignia' : 'Premium'}
+            </div>
+          )}
+
+          <div class={`flex flex-col ${h.featured ? 'lg:flex-row' : ''}`}>
+            <!-- Image side -->
+            <div class={`relative overflow-hidden ${h.featured ? 'lg:w-1/2 aspect-[5/3] lg:aspect-auto' : 'aspect-[5/4]'}`}>
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-[1600ms] group-hover:scale-105"
+                style={`background-image: url('${h.image}')`}
+              >
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/20 to-transparent"></div>
+              <!-- Big number -->
+              <span class="absolute top-6 left-6 font-numeric text-cream/90 text-2xl">
+                — {h.number}
+              </span>
+              <!-- Hover price overlay -->
+              <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                <span class="font-display text-cream text-4xl lg:text-5xl">
+                  {h.name}
+                </span>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class={`p-8 lg:p-10 ${h.featured ? 'lg:w-1/2 lg:flex lg:flex-col lg:justify-center' : ''}`}>
+              <p class="eyebrow text-crimson/80">{h.tagline}</p>
+
+              <div class="mt-4 flex items-baseline gap-3">
+                <span class="font-numeric text-cream text-5xl lg:text-6xl">{fmt(h.price)}</span>
+                <span class="font-accent italic text-cream/50 text-base">/ 3 horas</span>
+              </div>
+
+              <p class="mt-5 font-body text-cream/70 leading-relaxed max-w-md">
+                {h.descripcion}
+              </p>
+
+              <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 max-w-md">
+                {h.features.map((f) => (
+                  <li class="flex items-center gap-2 text-cream/65 text-sm">
+                    <span class="h-1 w-1 rounded-full bg-crimson"></span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-9 flex items-center gap-5">
+                <a
+                  href={waMessage(h.name)}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-3 text-cream font-body text-[11px] uppercase tracking-[0.32em] border-b border-crimson/60 pb-2 transition-all duration-300 hover:border-crimson hover:gap-5 hover:text-crimson-bright"
+                >
+                  Reservar esta habitación
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Tarifas extendidas -->
+    <div class="mt-20 lg:mt-28 border-t border-cream/10 pt-12" data-reveal>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
+        <div>
+          <p class="font-numeric text-crimson/80 text-5xl">03h</p>
+          <p class="eyebrow text-cream/60 mt-3">Tarifa base</p>
+          <p class="font-accent italic text-cream/70 mt-3 leading-relaxed">
+            Nuestra tarifa por defecto. Ideal para una pausa elegante.
+          </p>
+        </div>
+        <div>
+          <p class="font-numeric text-cream text-5xl">08h</p>
+          <p class="eyebrow text-cream/60 mt-3">Estancia extendida</p>
+          <p class="font-accent italic text-cream/70 mt-3 leading-relaxed">
+            Para alargar el momento sin prisa. Consulta tarifas por WhatsApp.
+          </p>
+        </div>
+        <div>
+          <p class="font-numeric text-cream text-5xl">12h</p>
+          <p class="eyebrow text-cream/60 mt-3">Estancia completa</p>
+          <p class="font-accent italic text-cream/70 mt-3 leading-relaxed">
+            El día completo en tu suite favorita. Consulta tarifas por WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,123 @@
+---
+const whatsapp = 'https://wa.me/573147241900?text=Hola%20Derroche%2C%20quiero%20informaci%C3%B3n%20para%20reservar.';
+---
+
+<section id="top" class="relative min-h-[100svh] w-full overflow-hidden bg-ink-950">
+  <!-- Atmospheric backdrop -->
+  <div class="absolute inset-0">
+    <!-- Deep gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-ink-950 via-bordeaux-deep to-ink-900"></div>
+    <!-- Crimson ambient glow, right side -->
+    <div
+      class="absolute -right-40 top-1/4 h-[720px] w-[720px] rounded-full opacity-40 blur-3xl"
+      style="background: radial-gradient(closest-side, #C8102E, transparent);"
+    >
+    </div>
+    <!-- Gold sliver glow, left bottom -->
+    <div
+      class="absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full opacity-15 blur-3xl"
+      style="background: radial-gradient(closest-side, #C9A961, transparent);"
+    >
+    </div>
+    <!-- Subtle architectural arch -->
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(82vw,1100px)] aspect-[3/4] arch border border-cream/[0.06]"></div>
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(62vw,820px)] aspect-[3/4] arch border border-cream/[0.04]"></div>
+
+    <!-- Dot pattern overlay -->
+    <div
+      class="absolute inset-0 opacity-[0.07]"
+      style="background-image: radial-gradient(circle at 1px 1px, #F5E9D7 1px, transparent 0); background-size: 38px 38px;"
+    >
+    </div>
+  </div>
+
+  <!-- Vertical rail (left) -->
+  <div class="hidden lg:flex absolute left-6 top-0 bottom-0 z-10 items-center">
+    <div class="flex flex-col items-center gap-6">
+      <span class="vertical-rl eyebrow text-cream/40">Cali · Colombia · MMXXV</span>
+      <span class="h-24 w-px bg-cream/15"></span>
+      <span class="vertical-rl font-accent italic text-cream/50 text-sm tracking-wider">tarifa desde 3 horas</span>
+    </div>
+  </div>
+
+  <!-- Vertical rail (right) -->
+  <div class="hidden lg:flex absolute right-6 top-0 bottom-0 z-10 items-center">
+    <div class="flex flex-col items-center gap-6">
+      <span class="vertical-rl font-accent italic text-cream/50 text-sm tracking-wider">privacidad · lujo · discreción</span>
+      <span class="h-24 w-px bg-cream/15"></span>
+      <a
+        href="https://www.instagram.com/derrochecali/"
+        target="_blank"
+        rel="noopener"
+        class="vertical-rl eyebrow text-cream/40 hover:text-crimson transition-colors"
+      >
+        @derrochecali
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-20 mx-auto max-w-[1500px] px-6 lg:px-24 pt-40 pb-32 min-h-[100svh] flex flex-col justify-center">
+    <div class="grid grid-cols-12 gap-6 items-center">
+      <div class="col-span-12 lg:col-span-9 xl:col-span-8">
+        <p class="eyebrow flex items-center gap-4 mb-8 animate-fade-in" style="animation-delay: 0.1s">
+          <span class="h-px w-10 bg-crimson"></span>
+          Aparta Hotel Boutique
+          <span class="text-crimson">·</span>
+          Suites por horas
+        </p>
+
+        <h1 class="font-display text-cream leading-[0.88] tracking-[-0.01em] animate-fade-up" style="animation-delay: 0.2s">
+          <span class="block text-[clamp(3.2rem,9vw,8.5rem)]">El arte de</span>
+          <span class="block text-[clamp(3.2rem,9vw,8.5rem)]">
+            <span class="italic text-crimson font-accent">consentirse</span>
+            <span class="text-cream"> sin</span>
+          </span>
+          <span class="block text-[clamp(3.2rem,9vw,8.5rem)]">medida.</span>
+        </h1>
+
+        <p class="font-accent italic text-cream/75 text-xl md:text-2xl mt-10 max-w-xl leading-relaxed animate-fade-up" style="animation-delay: 0.5s">
+          Un escape elegante para tus mejores momentos. Habitaciones íntimas,
+          ambientación impecable y privacidad absoluta en el corazón de Cali.
+        </p>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 animate-fade-up" style="animation-delay: 0.7s">
+          <a href={whatsapp} target="_blank" rel="noopener" class="btn-primary">
+            <span>Reservar por WhatsApp</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#habitaciones" class="btn-ghost">
+            <span>Conocer habitaciones</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stat block -->
+      <div class="col-span-12 lg:col-span-3 xl:col-span-4 lg:pl-12 animate-fade-up" style="animation-delay: 0.9s">
+        <div class="relative">
+          <div class="absolute -top-3 -left-3 w-2 h-2 bg-crimson rotate-45 animate-shimmer"></div>
+          <div class="border-l border-cream/20 pl-6 py-2">
+            <p class="eyebrow text-cream/50">Desde</p>
+            <p class="font-numeric text-5xl lg:text-6xl text-cream mt-2">
+              $82<span class="text-2xl align-top text-crimson">k</span>
+            </p>
+            <p class="eyebrow text-cream/50 mt-2">por 3 horas</p>
+          </div>
+          <div class="mt-8 border-l border-cream/20 pl-6 py-2">
+            <p class="eyebrow text-cream/50">Categorías</p>
+            <p class="font-display text-3xl text-cream mt-2">4 suites</p>
+            <p class="eyebrow text-cream/50 mt-2">silver · junior · presidencial · solarium</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-in" style="animation-delay: 1.3s">
+      <span class="eyebrow text-cream/50">Desliza</span>
+      <span class="h-12 w-px bg-gradient-to-b from-cream/40 to-transparent"></span>
+    </div>
+  </div>
+</section>

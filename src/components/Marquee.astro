@@ -1,0 +1,23 @@
+---
+const items = [
+  'Privacidad absoluta',
+  'Suites por horas',
+  'Jacuzzi y solárium',
+  'Lujo discreto',
+  'Cali · Colombia',
+  'Tarifas 3 · 8 · 12 h',
+  'Promo 20% efectivo',
+  'Wifi · Aire · TV',
+];
+---
+
+<section class="relative border-y border-cream/10 bg-ink-900/60 overflow-hidden">
+  <div class="marquee animate-marquee py-6">
+    {[...items, ...items].map((item) => (
+      <div class="flex items-center gap-12 px-8 whitespace-nowrap">
+        <span class="font-display text-cream/80 text-3xl md:text-4xl">{item}</span>
+        <span class="font-accent italic text-crimson text-3xl">✦</span>
+      </div>
+    ))}
+  </div>
+</section>

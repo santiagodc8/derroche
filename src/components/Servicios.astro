@@ -1,0 +1,70 @@
+---
+const servicios = [
+  { name: 'Wifi de alta velocidad', icon: 'wifi' },
+  { name: 'Aire acondicionado', icon: 'snow' },
+  { name: 'Smart TV en cada habitación', icon: 'tv' },
+  { name: 'Jacuzzi en suites premium', icon: 'jacuzzi' },
+  { name: 'Parqueadero privado', icon: 'car' },
+  { name: 'Agua caliente 24/7', icon: 'water' },
+  { name: 'Bar y minibar', icon: 'glass' },
+  { name: 'Privacidad absoluta', icon: 'lock' },
+];
+
+const icons: Record<string, string> = {
+  wifi: '<path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/>',
+  snow: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/>',
+  tv: '<rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/>',
+  jacuzzi: '<path d="M2 12h20M5 12V8a3 3 0 0 1 6 0M19 12v8M5 12v8M9 17h6"/>',
+  car: '<path d="M5 13l1.5-4.5a2 2 0 0 1 2-1.5h7a2 2 0 0 1 2 1.5L19 13M5 13h14v5H5zM7 18v2M17 18v2"/><circle cx="8" cy="15.5" r="1"/><circle cx="16" cy="15.5" r="1"/>',
+  water: '<path d="M12 2.5s-6 7-6 11.5a6 6 0 0 0 12 0c0-4.5-6-11.5-6-11.5z"/>',
+  glass: '<path d="M8 21h8M12 17v4M5 4h14l-2 9a5 5 0 0 1-10 0z"/>',
+  lock: '<rect x="4" y="11" width="16" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+};
+---
+
+<section id="servicios" class="relative py-28 lg:py-36 bg-ink-900/40 border-y border-cream/10 overflow-hidden">
+  <!-- Decorative glow -->
+  <div class="absolute -left-40 top-1/2 h-[480px] w-[480px] rounded-full opacity-10 blur-3xl pointer-events-none"
+       style="background: radial-gradient(closest-side, #C9A961, transparent);"></div>
+
+  <div class="relative mx-auto max-w-[1500px] px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4" data-reveal>
+        <p class="eyebrow flex items-center gap-4">
+          <span class="h-px w-10 bg-crimson"></span>
+          Servicios
+        </p>
+        <h2 class="section-heading mt-6">
+          Cada detalle,<br />
+          <span class="italic font-accent text-crimson">pensado.</span>
+        </h2>
+        <p class="font-accent italic text-cream/70 text-xl mt-8 max-w-md leading-relaxed">
+          Comodidad, discreción y todos los detalles para que la experiencia
+          hable por sí sola.
+        </p>
+      </div>
+
+      <div class="lg:col-span-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-cream/10">
+          {servicios.map((s, i) => (
+            <div
+              class="bg-ink-950 p-6 lg:p-7 flex flex-col gap-4 group hover:bg-bordeaux/40 transition-colors duration-500 min-h-[180px]"
+              data-reveal
+              style={`--reveal-delay: ${(i % 4) * 70}ms`}
+            >
+              <div class="text-crimson group-hover:text-crimson-bright transition-colors duration-300">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" set:html={icons[s.icon]} />
+              </div>
+              <p class="font-display text-cream text-base lg:text-lg leading-snug">
+                {s.name}
+              </p>
+              <span class="font-numeric text-cream/20 text-sm mt-auto">
+                — 0{i + 1}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
