@@ -20,6 +20,13 @@
     background-color: #0B0507;
     color: #F5E9D7;
     overflow-x: hidden;
+    font-optical-sizing: auto;
+  }
+
+  /* Fraunces display — let optical sizing breathe at large sizes */
+  .font-display {
+    font-optical-sizing: auto;
+    font-weight: 400;
   }
 
   ::selection {

@@ -32,7 +32,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Italiana', 'serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
         accent: ['"Cormorant Garamond"', 'serif'],
         body: ['Manrope', 'system-ui', 'sans-serif'],
         numeric: ['"DM Serif Display"', 'serif'],

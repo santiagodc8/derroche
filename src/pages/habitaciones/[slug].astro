@@ -1,0 +1,342 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import FloatingWhatsApp from '../../components/FloatingWhatsApp.astro';
+import { habitaciones, fmtPrecio, waReserva, type Habitacion } from '../../data/habitaciones';
+
+export function getStaticPaths() {
+  return habitaciones.map((h) => ({
+    params: { slug: h.slug },
+    props: { room: h },
+  }));
+}
+
+interface Props {
+  room: Habitacion;
+}
+
+const { room } = Astro.props;
+const otras = habitaciones.filter((h) => h.slug !== room.slug);
+
+// Layout patterns for the editorial gallery grid (cycles through these spans)
+const spans = [
+  'col-span-12 lg:col-span-8 aspect-[16/10]',
+  'col-span-6 lg:col-span-4 aspect-[3/4] lg:aspect-auto',
+  'col-span-6 lg:col-span-4 aspect-[3/4] lg:aspect-auto',
+  'col-span-12 lg:col-span-8 aspect-[16/10]',
+  'col-span-6 lg:col-span-6 aspect-square',
+  'col-span-6 lg:col-span-6 aspect-square',
+];
+---
+
+<Layout
+  title={`${room.name} · Derroche Aparta Hotel — Cali`}
+  description={`${room.name} — ${room.tagline}. ${room.descripcion} Desde ${fmtPrecio(room.price)} por 3 horas en Derroche Aparta Hotel, Cali.`}
+>
+  <Nav />
+
+  <main id="top" class="relative bg-ink-950 overflow-hidden">
+    <!-- Ambient backdrop -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute -right-40 top-0 h-[640px] w-[640px] rounded-full opacity-25 blur-3xl"
+           style="background: radial-gradient(closest-side, #C8102E, transparent);"></div>
+      <div class="absolute inset-0 opacity-[0.05]"
+           style="background-image: radial-gradient(circle at 1px 1px, #F5E9D7 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-[1500px] px-6 lg:px-12 pt-32 lg:pt-36">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-3 text-[11px] font-body uppercase tracking-[0.28em] text-cream/40" aria-label="Migas de pan">
+        <a href="/" class="hover:text-crimson transition-colors">Inicio</a>
+        <span>/</span>
+        <a href="/#habitaciones" class="hover:text-crimson transition-colors">Habitaciones</a>
+        <span>/</span>
+        <span class="text-cream/70">{room.name}</span>
+      </nav>
+
+      <!-- Hero split -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mt-10 lg:mt-14">
+        <div class="lg:col-span-5">
+          <p class="eyebrow flex items-center gap-4">
+            <span class="h-px w-10 bg-crimson"></span>
+            Suite {room.number} · {room.tagline}
+          </p>
+
+          <h1 class="font-display text-cream leading-[0.92] tracking-[-0.015em] mt-6 text-[clamp(2.8rem,7vw,6rem)]">
+            {room.name}
+          </h1>
+
+          <p class="font-accent italic text-cream/75 text-xl md:text-2xl mt-7 max-w-lg leading-relaxed">
+            {room.descripcion}
+          </p>
+
+          <div class="mt-9 flex items-baseline gap-3">
+            <span class="font-numeric text-cream text-5xl lg:text-6xl">{fmtPrecio(room.price)}</span>
+            <span class="font-accent italic text-cream/50 text-base">/ 3 horas</span>
+          </div>
+
+          <!-- Quick specs -->
+          <div class="mt-8 flex flex-wrap gap-x-10 gap-y-5">
+            <div class="border-l border-cream/15 pl-4">
+              <p class="eyebrow text-cream/45">Cama</p>
+              <p class="font-display text-cream text-xl mt-1.5">{room.cama}</p>
+            </div>
+            <div class="border-l border-cream/15 pl-4">
+              <p class="eyebrow text-cream/45">Capacidad</p>
+              <p class="font-display text-cream text-xl mt-1.5">{room.capacidad}</p>
+            </div>
+            <div class="border-l border-cream/15 pl-4">
+              <p class="eyebrow text-cream/45">Fotos</p>
+              <p class="font-display text-cream text-xl mt-1.5">{room.images.length}</p>
+            </div>
+          </div>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <a href={waReserva(room.name)} target="_blank" rel="noopener" class="btn-primary">
+              <span>Reservar por WhatsApp</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#galeria" class="btn-ghost">
+              <span>Ver galería</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="lg:col-span-7">
+          <button
+            type="button"
+            class="group relative block w-full aspect-[4/3] lg:aspect-[5/4] overflow-hidden border border-cream/10"
+            data-lightbox-open
+            data-index="0"
+            aria-label="Ampliar foto principal"
+          >
+            <img
+              src={room.images[0]}
+              alt={`${room.name} — vista principal`}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] group-hover:scale-105"
+            />
+            <div class="absolute inset-0 ring-1 ring-inset ring-cream/10"></div>
+            <span class="absolute bottom-5 right-5 flex items-center gap-2 text-cream text-[11px] font-body uppercase tracking-[0.28em] backdrop-blur-sm bg-ink-950/40 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+              </svg>
+              Ampliar
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Description + amenities -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mt-28 lg:mt-36">
+        <div class="lg:col-span-7">
+          <p class="eyebrow flex items-center gap-4">
+            <span class="h-px w-10 bg-crimson"></span>
+            La experiencia
+          </p>
+          <div class="mt-8 space-y-6 max-w-2xl">
+            {room.descripcionLarga.map((p) => (
+              <p class="font-accent italic text-cream/80 text-2xl leading-relaxed">{p}</p>
+            ))}
+          </div>
+        </div>
+
+        <aside class="lg:col-span-5 lg:sticky lg:top-32 self-start">
+          <div class="border border-cream/10 bg-ink-900/50 p-8 lg:p-9">
+            <p class="eyebrow text-cream/50">Esta suite incluye</p>
+            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+              {room.amenidades.map((a) => (
+                <li class="flex items-start gap-3 text-cream/80 font-body text-sm leading-snug">
+                  <span class="mt-1.5 h-1 w-1 rounded-full bg-crimson shrink-0"></span>
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Full gallery -->
+      <section id="galeria" class="mt-28 lg:mt-36 scroll-mt-28">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+          <div>
+            <p class="eyebrow flex items-center gap-4">
+              <span class="h-px w-10 bg-crimson"></span>
+              Galería · {room.images.length} fotos
+            </p>
+            <h2 class="section-heading mt-6">
+              Cada rincón de la<br />
+              <span class="italic font-accent text-crimson">{room.name}.</span>
+            </h2>
+          </div>
+          <p class="font-accent italic text-cream/60 text-lg max-w-sm leading-relaxed">
+            Haz clic en cualquier foto para verla en grande.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-3 lg:gap-5">
+          {room.images.map((src, i) => (
+            <button
+              type="button"
+              class={`group relative overflow-hidden ${spans[i % spans.length]}`}
+              data-lightbox-open
+              data-index={i}
+              aria-label={`Ampliar foto ${i + 1} de ${room.name}`}
+            >
+              <img
+                src={src}
+                alt={`${room.name} — foto ${i + 1}`}
+                loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950/50 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500"></div>
+              <span class="absolute top-4 left-4 font-numeric text-cream/70 text-sm">— 0{i + 1}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- Tarifas -->
+      <section class="mt-28 lg:mt-36 border-t border-cream/10 pt-14">
+        <p class="eyebrow flex items-center gap-4">
+          <span class="h-px w-10 bg-crimson"></span>
+          Tarifas
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-cream/10 mt-10">
+          {room.tarifas.map((t) => (
+            <div class="bg-ink-950 p-8 lg:p-10">
+              <p class="font-numeric text-cream text-5xl">{t.horas}</p>
+              <p class="mt-5 font-display text-cream text-3xl">
+                {t.precio !== null ? fmtPrecio(t.precio) : 'Consultar'}
+              </p>
+              <p class="eyebrow text-cream/50 mt-3">{t.nota}</p>
+            </div>
+          ))}
+        </div>
+        <p class="font-accent italic text-cream/55 text-base mt-6">
+          Las tarifas de 8 y 12 horas se confirman por WhatsApp según disponibilidad.
+        </p>
+      </section>
+
+      <!-- CTA band -->
+      <section class="mt-24 lg:mt-32">
+        <div class="relative overflow-hidden border border-crimson/30 bg-gradient-to-br from-bordeaux-deep via-bordeaux to-ink-900 p-10 lg:p-16">
+          <div class="absolute -right-24 -top-24 w-[360px] h-[360px] arch border border-cream/10 pointer-events-none"></div>
+          <div class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div>
+              <h2 class="font-display text-cream text-[clamp(2rem,4vw,3.2rem)] leading-[0.95]">
+                ¿Lista la <span class="italic font-accent text-crimson">{room.name}</span>?
+              </h2>
+              <p class="font-accent italic text-cream/70 text-xl mt-4 max-w-md leading-relaxed">
+                Reserva en segundos por WhatsApp. Disponibilidad inmediata, acceso discreto.
+              </p>
+            </div>
+            <a href={waReserva(room.name)} target="_blank" rel="noopener" class="btn-primary shrink-0">
+              <span>Reservar ahora</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Other rooms -->
+      <section class="mt-28 lg:mt-36 pb-28 lg:pb-36">
+        <div class="flex items-end justify-between mb-12">
+          <h2 class="section-heading">Otras <span class="italic font-accent text-crimson">suites.</span></h2>
+          <a href="/#habitaciones" class="hidden sm:inline-flex items-center gap-3 text-cream/60 font-body text-[11px] uppercase tracking-[0.32em] hover:text-crimson transition-colors">
+            Ver todas
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 lg:gap-7">
+          {otras.map((o) => (
+            <a href={`/habitaciones/${o.slug}`} class="group relative block aspect-[3/4] overflow-hidden border border-cream/10 hover:border-crimson/40 transition-colors duration-500">
+              <img src={o.images[0]} alt={o.name} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/20 to-transparent"></div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <p class="eyebrow text-crimson/90">{o.tagline}</p>
+                <p class="font-display text-cream text-3xl mt-2">{o.name}</p>
+                <p class="font-numeric text-cream/80 text-xl mt-1">{fmtPrecio(o.price)} <span class="font-accent italic text-cream/45 text-sm">/ 3h</span></p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+  <FloatingWhatsApp />
+
+  <!-- Lightbox -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-ink-950/95 backdrop-blur-md"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Galería ampliada"
+  >
+    <button type="button" class="absolute top-5 right-5 h-12 w-12 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-lightbox-close aria-label="Cerrar">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <button type="button" class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 h-14 w-14 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-lightbox-prev aria-label="Anterior">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 h-14 w-14 flex items-center justify-center text-cream/70 hover:text-crimson transition-colors" data-lightbox-next aria-label="Siguiente">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <figure class="relative max-w-[90vw] max-h-[82vh] flex flex-col items-center gap-4">
+      <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[78vh] object-contain border border-cream/10" />
+      <figcaption class="font-body text-[11px] uppercase tracking-[0.32em] text-cream/50" data-lightbox-counter></figcaption>
+    </figure>
+  </div>
+
+  <script is:inline define:vars={{ images: room.images, roomName: room.name }}>
+    (() => {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const counter = lb?.querySelector('[data-lightbox-counter]');
+      if (!lb || !img) return;
+      let current = 0;
+
+      const render = () => {
+        img.src = images[current];
+        img.alt = `${roomName} — foto ${current + 1}`;
+        if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+      };
+      const open = (i) => {
+        current = i;
+        render();
+        lb.classList.remove('hidden');
+        lb.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      };
+      const close = () => {
+        lb.classList.add('hidden');
+        lb.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+      const next = () => { current = (current + 1) % images.length; render(); };
+      const prev = () => { current = (current - 1 + images.length) % images.length; render(); };
+
+      document.querySelectorAll('[data-lightbox-open]').forEach((el) => {
+        el.addEventListener('click', () => open(Number(el.getAttribute('data-index')) || 0));
+      });
+      lb.querySelector('[data-lightbox-close]')?.addEventListener('click', close);
+      lb.querySelector('[data-lightbox-next]')?.addEventListener('click', next);
+      lb.querySelector('[data-lightbox-prev]')?.addEventListener('click', prev);
+      lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', (e) => {
+        if (lb.classList.contains('hidden')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+  </script>
+</Layout>
