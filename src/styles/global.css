@@ -59,7 +59,7 @@
   }
 
   body {
-    font-family: 'Manrope', system-ui, sans-serif;
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
     background-color: rgb(var(--c-ink-950));
     color: rgb(var(--c-cream));
     overflow-x: hidden;
@@ -67,9 +67,10 @@
     transition: background-color 0.5s ease, color 0.5s ease;
   }
 
-  /* Playfair Display — elegant high-contrast serif for headings */
+  /* Bricolage Grotesque — modern, characterful display for headings */
   .font-display {
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
@@ -200,7 +201,7 @@
   background-color: rgb(var(--c-crimson));
   color: rgb(var(--c-ivory));
   padding: 0.75rem 1.25rem;
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;

@@ -39,10 +39,10 @@ export default {
         ivory: v('ivory'),
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        accent: ['"Cormorant Garamond"', 'serif'],
-        body: ['Manrope', 'system-ui', 'sans-serif'],
-        numeric: ['"DM Serif Display"', 'serif'],
+        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        accent: ['"Instrument Serif"', 'Georgia', 'serif'],
+        body: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+        numeric: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         widestest: '0.42em',
